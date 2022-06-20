@@ -221,6 +221,7 @@ def printGraph(g):
         print()
     print("-------------------")
 
+
 def segmentation():
     image = cv2.imread('sample.png', cv2.IMREAD_GRAYSCALE)
     image = image.astype('uint8')
@@ -230,15 +231,6 @@ def segmentation():
         for j in range(XX):
             neighbors_matrix.insertVertex(Vertex(key=YY * j + i, data=image[i, j]))
 
-    # for i in range(1, YY-1):
-    #     for j in range(1, XX-1):
-    #         eight_neighbours = (i-1, j-1), (i-1, j), (i-1, j+1), (i, j-1), (i, j+1), (i+1, j-1), (i+1, j), (i+1, j+1)
-    #         curr_vertex = neighbors_matrix.getVertexByKey(YY*j+i)
-    #         for x in eight_neighbours:
-    #             next_vertex = neighbors_matrix.getVertexByKey(YY * x[1] + x[0])
-    #             edge = np.abs(curr_vertex.data - next_vertex.data)
-    #             neighbors_matrix.insertEdge(curr_vertex, next_vertex, edge)
-    #             # neighbors_matrix.insertEdge(next_vertex, curr_vertex, edge)
     for i in range(1, YY - 1):
         for j in range(1, XX - 1):
             for n in range(3):
@@ -266,11 +258,12 @@ def segmentation():
     bfs_fun(mst_graph, longest_edge_idx[0], 50)
     bfs_fun(mst_graph, longest_edge_idx[1], 160)
 
-    for i in range(1, YY-1):
-        for j in range(1, XX-1):
-            IS[i, j] = mst_graph.getVertex(YY*j+i).data
+    for i in range(1, YY - 1):
+        for j in range(1, XX - 1):
+            IS[i, j] = mst_graph.getVertex(YY * j + i).data
     plt.imshow(IS, 'gray')
     plt.show()
+
 
 if __name__ == '__main__':
     segmentation()
